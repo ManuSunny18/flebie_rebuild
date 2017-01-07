@@ -1,0 +1,38 @@
+@font-face {
+	font-family: "iconfont";
+	src: url("/public/fonts/iconfont.eot?e9fe2b23554c6a175b8509ce9d297d2b?#iefix") format("embedded-opentype"),
+url("/public/fonts/iconfont.woff?e9fe2b23554c6a175b8509ce9d297d2b") format("woff");
+}
+
+.icon {
+	line-height: 1;
+}
+
+.icon:before {
+	font-family: iconfont !important;
+	font-style: normal;
+	font-weight: normal !important;
+	vertical-align: top;
+}
+
+.icon-add-circular-outlined-button:before {
+	content: "\f101";
+}
+.icon-appointment:before {
+	content: "\f102";
+}
+.icon-delete-button:before {
+	content: "\f103";
+}
+.icon-home-delivery:before {
+	content: "\f104";
+}
+.icon-phone:before {
+	content: "\f105";
+}
+.icon-round-delete-button:before {
+	content: "\f106";
+}
+.icon-shopping-cart:before {
+	content: "\f107";
+}

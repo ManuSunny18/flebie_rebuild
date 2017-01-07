@@ -1,0 +1,34 @@
+@import "/layout.scss";
+html{
+    background-image: url("https://www.flebie.com/img/ListPage_Cover.jpg");
+    background-repeat: no-repeat;
+}
+.loader-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(204, 204, 204, 0.51);
+    z-index: 999;
+    .sk-circle {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transform: scale(2);
+        margin: auto;
+        right: 0;
+    }
+}
+.test-accord {
+    min-height: 220px;
+}
+.lab-lists > div {
+    width: 33.3%;
+    float: left;
+    padding: 1em;
+    >div{
+        box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.66);
+    }
+}
