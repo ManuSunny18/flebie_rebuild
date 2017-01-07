@@ -50,6 +50,7 @@
     "run-sequence": "^1.2.2",
     "style-loader": "^0.13.1",
     "webfonts-generator": "^0.3.5",
+    "webpack": "^1.14.0",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.2"
   },
