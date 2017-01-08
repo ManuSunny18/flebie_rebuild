@@ -2,6 +2,7 @@
 html{
     background-image: url("https://www.flebie.com/img/ListPage_Cover.jpg");
     background-repeat: no-repeat;
+    background-size: auto 310px;
 }
 .container-main {
     padding-bottom: 200px;
@@ -86,15 +87,43 @@ html{
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.58);
+    background: rgba(0, 0, 0, 0.90);
     color: #ffffff;
 }
 .clearfix.details-block div {
     padding: .5em 1em;
-*:before{
-    color: #ffffff;
+    *{
+        color: #ffffff;
     }
     .icon{
         margin-right: 6px;
     }
+    .icon.icon-delete {
+        color: #ffffff;
+    }
+}
+.tab-block .fade-out {
+    height: 0;
+    overflow: hidden;
+}
+.tab-item{
+    color: #ffffff;
+}
+.tab-item.fade-in {
+    height: auto;
+}
+.tab-head-row .btn.tab-btn {
+    padding-left: 0px;
+    text-decoration: none;
+    margin-right: 12px;
+    color: #000000;
+}
+.btn.tab-btn.active-tab {
+    background: #000000;
+    color: #fff;
+    padding-left: 12px;
+}
+.tab-block {
+    min-height: 160px;
+    overflow: hidden;
 }

@@ -8,7 +8,8 @@ class Search extends React.Component {
 		this.state={
 			loading:true,
 			gotList:false,
-			labList:[]
+			labList:[],
+			activeTab:"0test"
 		}
     }
     loadLabs(){
@@ -53,6 +54,15 @@ class Search extends React.Component {
 		var elem = e.target.getAttribute("data-target");
 		this.refs[elem].className="lab-details fade-out";
 	}
+	openTestDesc(e){
+		var currentTab= e.target.getAttribute("data-target");
+		this.setState({
+			activeTab:currentTab
+		})
+	}
+	openKart(e){
+		document.getElementById("openCart").click();
+	}
     render(){
 		var _this = this;
 		var loader= <div className={(!this.state.loading)?"hide":"loader-wrap"}>
@@ -72,9 +82,21 @@ class Search extends React.Component {
 				</div>
 			</div>;
 		var labListUI=[];
+		var testTabsUI =[];
+		var testHeadUI=[];
+
 		labListUI= this.state.labList.map(function(item,index){
 			var lab = item.lab;
 			var labTest = item.labTest;
+			var test = item.test;
+			var testUI= <div ref={index+"test"} className={(_this.state.activeTab== index+"test")?"tab-item fade-in":"fade-out"}>
+			<h2>{test.testName}</h2>
+			<p><span className="icon icon-flask"/>{test.sample}</p>
+			<p className="test-desc">{test.description}</p>
+			</div>
+			var headUI = <button onClick={_this.openTestDesc.bind(_this)} data-target={index+"test"} className={(_this.state.activeTab== index+"test")?"btn btn-link tab-btn active-tab":"btn btn-link tab-btn"}>{test.testName}</button>
+			testTabsUI.push(testUI);
+			testHeadUI.push(headUI);
 			return <div className="list-item">
 					<div><div className="item-head">
 						<button data-target={"labDetails"+index} onClick={_this.showMoreDetails.bind(_this)} className="btn btn-link icon icon-info"></button>
@@ -93,7 +115,7 @@ class Search extends React.Component {
 							<span className={(lab.isNABLAccredited)?"fl icon icon-checked":"hide"}/>
 							<span className={(lab.isAvailableForHC)?"fl icon icon-homedelivery":"hide"}/>
 							<span className={(lab.isAvailableForOB)?"fl icon icon-appointment":"hide"}/>
-							<button className="fr btn-btn-success bookme flebie-btn">BOOK ME</button>
+							<button onClick={_this.openKart.bind(this)} className="fr btn-btn-success bookme flebie-btn">BOOK ME</button>
 						</div>
 					</div>
 					<div ref={"labDetails"+index} className="lab-details fade-out">
@@ -122,6 +144,11 @@ class Search extends React.Component {
             <div className="search-main">
 				{loader}
 				<div className="test-accord">
+					<div className="tab-block">{testTabsUI}
+					</div>
+					<div className="clearfix tab-head-row">
+					{testHeadUI}
+					</div>
 				</div>
 				<div className="clearfix lab-lists">
 				{labListUI}

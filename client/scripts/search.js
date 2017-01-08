@@ -4,8 +4,6 @@ import Styles from '../scss/_search.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-debugger;
-
 ReactDOM.render(
   <Search data={{hello:"world"}} />,
   document.getElementById('root')
