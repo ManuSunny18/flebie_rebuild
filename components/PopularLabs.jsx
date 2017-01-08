@@ -5,7 +5,7 @@ class PopularLabs extends React.Component {
     constructor(props){
 		super(props);
     }
-    componenDidMount(){
+    componentDidMount(){
         console.log("popular");
 	}
     render(){

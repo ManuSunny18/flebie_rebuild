@@ -3,6 +3,9 @@ html{
     background-image: url("https://www.flebie.com/img/ListPage_Cover.jpg");
     background-repeat: no-repeat;
 }
+.container-main {
+    padding-bottom: 200px;
+}
 .loader-wrap {
     position: fixed;
     top: 0;
@@ -28,7 +31,70 @@ html{
     width: 33.3%;
     float: left;
     padding: 1em;
+        
     >div{
+        position: relative;
         box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.66);
+    }
+}
+.lab-lists .item-head {
+    width: 100%;
+    position: relative;
+}
+.striked-price {
+    position: relative;
+    top: 0px;
+    font-size: 18px;
+    padding: 6px;
+    font-weight: bolder;
+}
+.striked-price:before {
+    position: absolute;
+    top: 12px;
+    content: " ";
+    height: 1px;
+    background: #000000;
+    width: 115%;
+    transform: rotate(10deg);
+    left: -5px;
+}
+.actual-price {
+    position: relative;
+    z-index: 2;
+    color: black;
+    background: url("https://www.flebie.com/img/price_ribbon.png");
+    background-size: cover;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+.lab-footer {
+    padding: 12px;
+    h3{
+        margin:0px;
+    }
+}
+.flebie-btn{
+    background-color: #00cf17;
+    border: medium none;
+    border-radius: 15px;
+    font-weight: bold;
+    line-height: 30px;
+    padding: 0 20px 0 20px;
+    color: #fff
+}
+.lab-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.58);
+    color: #ffffff;
+}
+.clearfix.details-block div {
+    padding: .5em 1em;
+*:before{
+    color: #ffffff;
+    }
+    .icon{
+        margin-right: 6px;
     }
 }

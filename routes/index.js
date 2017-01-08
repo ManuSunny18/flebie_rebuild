@@ -12,6 +12,7 @@ module.exports = function() {
   router.get('/getMultiLabs',indexController.getMultiLabs);
 
   router.get('/multisearchlabs', searchController.renderPage);
+  //router.get('/multisearchlabs', searchController.renderPage);
 
 
   return router;

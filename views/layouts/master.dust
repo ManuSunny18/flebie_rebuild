@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <title>Demo- {+title /}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
      {+pageStyles /}
   </head>
   <body>
@@ -10,8 +11,8 @@
     </a>
 
     <div class="fr nv-xtra">
-    <button class="btn btn-link icon icon-phone"></button>
-    <button class="btn btn-link icon icon-shopping-cart">
+    <button class="btn btn-link icon icon-phone" id="callUs" data-target="callUsPop"></button>
+    <button class="btn btn-link icon icon-shopping-cart" id="openCart" data-target="cartPopUp">
     </button>
     </div>
   </div>

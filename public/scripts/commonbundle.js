@@ -53,6 +53,8 @@
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _modal = __webpack_require__(2);
 	
 	var _modal2 = _interopRequireDefault(_modal);
@@ -65,15 +67,90 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _editCart = __webpack_require__(186);
+	
+	var _editCart2 = _interopRequireDefault(_editCart);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_modal2.default, { open: false, content: "hellooooo" }), document.getElementById('utilBlock'));
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	__webpack_require__(187);
+	
+	var CallModalContent = function (_React$Component) {
+	  _inherits(CallModalContent, _React$Component);
+	
+	  function CallModalContent() {
+	    _classCallCheck(this, CallModalContent);
+	
+	    return _possibleConstructorReturn(this, (CallModalContent.__proto__ || Object.getPrototypeOf(CallModalContent)).apply(this, arguments));
+	  }
+	
+	  _createClass(CallModalContent, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'clearfix' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'modal-body text-muted' },
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            '9611136000'
+	          ),
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'support@flebie.com'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'Our customer experience team is available on all days from 9am to 11:30pm to assist you with any questions or issues you might have.Please, feel free to email us at support@flebie.com'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'modal-footer' },
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', 'data-dismiss': 'modal', className: 'btn btn-success curved' },
+	            'THANK you'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return CallModalContent;
+	}(_react2.default.Component);
+	
+	_reactDom2.default.render(_react2.default.createElement(
+	  'div',
+	  null,
+	  _react2.default.createElement(_modal2.default, { open: false, selfClose: true,
+	    id: "callUsPop",
+	    css: 'callus-popup',
+	    headText: "Customer Support",
+	    content: _react2.default.createElement(CallModalContent, null) }),
+	  _react2.default.createElement(_modal2.default, { open: false, selfClose: true,
+	    id: "cartPopUp",
+	    headText: "Your Tests",
+	    css: 'your-tests-pop',
+	    content: _react2.default.createElement(_editCart2.default, null) })
+	), document.getElementById('utilBlock'));
 
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -106,22 +183,45 @@
 	    }
 	
 	    _createClass(Modal, [{
-	        key: "componenDidMount",
-	        value: function componenDidMount() {}
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            document.body.addEventListener('modalClose', this.closeThis.bind(this));
+	            document.body.addEventListener('modalOpen', this.openModal.bind(this));
+	        }
 	    }, {
-	        key: "render",
+	        key: 'openModal',
+	        value: function openModal(e) {
+	            var elem = e.data.id;
+	            if (this.refs[elem]) {
+	                this.refs[elem].className = "modal-overlay fade-in";
+	            }
+	        }
+	    }, {
+	        key: 'closeThis',
+	        value: function closeThis(e) {
+	            if (e.target.id == this.props.id) {
+	                this.refs[this.props.id].className = "modal-overlay fade-out";
+	            }
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: this.props.open ? "modal-overlay fade-in" : "modal-overlay fade-out" },
+	                'div',
+	                { ref: this.props.id, id: this.props.id, onClick: this.closeThis.bind(this), className: this.props.open ? "modal-overlay fade-in" : "modal-overlay fade-out" },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "modal-content" },
+	                    'div',
+	                    { className: "modal-content  " + this.props.css },
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "modal-wrap" },
-	                        this.props.content
-	                    )
+	                        'div',
+	                        { className: 'modal-header' },
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            this.props.headText
+	                        )
+	                    ),
+	                    this.props.content
 	                )
 	            );
 	        }
@@ -22793,6 +22893,299 @@
 	
 	module.exports = ReactDOMInvalidARIAHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var OpenCartModalContent = function (_React$Component) {
+	  _inherits(OpenCartModalContent, _React$Component);
+	
+	  function OpenCartModalContent(props) {
+	    _classCallCheck(this, OpenCartModalContent);
+	
+	    var _this2 = _possibleConstructorReturn(this, (OpenCartModalContent.__proto__ || Object.getPrototypeOf(OpenCartModalContent)).call(this, props));
+	
+	    _this2.state = {
+	      testsList: {
+	        items: []
+	      }
+	    };
+	    return _this2;
+	  }
+	
+	  _createClass(OpenCartModalContent, [{
+	    key: "getUserTests",
+	    value: function getUserTests() {
+	      var list = {
+	        "totalItems": 3,
+	        "totalPrice": 1269,
+	        "totalListPrice": 1410,
+	        "items": [{
+	          "testname": "Total Iron Binding Capacity (TIBC)",
+	          "price": 189,
+	          "listPrice": 210,
+	          "quantity": 1,
+	          "isHomeCollectible": true,
+	          "labtestid": "QH9hPLiNmH"
+	        }, {
+	          "testname": "Thyroxine Binding Globulin (TBG), Serum",
+	          "price": 540,
+	          "listPrice": 600,
+	          "quantity": 2,
+	          "isHomeCollectible": true,
+	          "labtestid": "FiKTBW1HXr"
+	        }],
+	        "userEmail": "",
+	        "homeCollectible": true,
+	        "labname": "Thyrocare",
+	        "labId": "DhdJqyTrhg",
+	        "labAddress": "#5/3/1, 24th Main, Parangipalya, HSR Layout, Sector-2, Bangalore - 560102."
+	      };
+	      this.setState({
+	        testsList: list
+	      });
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.getUserTests.bind(this)();
+	    }
+	  }, {
+	    key: "deleteOne",
+	    value: function deleteOne(e) {
+	      var itemId = e.target.getAttribute("data-id");
+	      var dataList = this.state.testsList;
+	      var item = dataList.items[itemId];
+	      if (item.quantity == 1) {
+	        dataList.items.splice(itemId, 1);
+	      } else {
+	        item.quantity = item.quantity - 1;
+	      }
+	      dataList.totalItems = dataList.totalItems - 1;
+	      dataList.totalListPrice = dataList.totalListPrice - item.listPrice;
+	      dataList.totalPrice = dataList.totalPrice - item.price;
+	      this.setState({
+	        testsList: dataList
+	      });
+	    }
+	  }, {
+	    key: "addOne",
+	    value: function addOne(e) {
+	      var itemId = e.target.getAttribute("data-id");
+	      var dataList = this.state.testsList;
+	      var item = dataList.items[itemId];
+	      item.quantity = item.quantity + 1;
+	      dataList.totalItems = dataList.totalItems + 1;
+	      dataList.totalListPrice = dataList.totalListPrice + item.listPrice;
+	      dataList.totalPrice = dataList.totalPrice + item.price;
+	      this.setState({
+	        testsList: dataList
+	      });
+	    }
+	  }, {
+	    key: "deleteTest",
+	    value: function deleteTest(e) {
+	      var itemId = e.target.getAttribute("data-id");
+	      var dataList = this.state.testsList;
+	      var item = dataList.items[itemId];
+	      dataList.items.splice(itemId, 1);
+	      dataList.totalItems = dataList.totalItems - item.quantity;
+	      dataList.totalListPrice = dataList.totalListPrice - item.quantity * item.listPrice;
+	      dataList.totalPrice = dataList.totalPrice - item.quantity * item.price;
+	      this.setState({
+	        testsList: dataList
+	      });
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var listUI = [];
+	      var _this = this;
+	      if (this.state.testsList.items.length > 0) {
+	        var head = _react2.default.createElement(
+	          "div",
+	          { className: "test-head-row" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-head" },
+	            "Item"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-qnt" },
+	            "Quantity"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-mrp" },
+	            "MRP"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "item-price" },
+	            "Price"
+	          )
+	        );
+	        var list = this.state.testsList.items.map(function (item, index) {
+	          return _react2.default.createElement(
+	            "div",
+	            { className: "test-row" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item-head" },
+	              item.testname
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item-qnt" },
+	              _react2.default.createElement("button", { "data-id": index, onClick: _this.deleteOne.bind(_this), className: "btn btn-naked icon icon-minus" }),
+	              item.quantity,
+	              _react2.default.createElement("button", { "data-id": index, onClick: _this.addOne.bind(_this), className: "btn btn-naked icon icon-plus" }),
+	              _react2.default.createElement("button", { "data-id": index, onClick: _this.deleteTest.bind(_this), className: "btn btn-naked icon icon-bin" })
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item-mrp" },
+	              _react2.default.createElement("span", { className: "icon icon-rupee" }),
+	              item.listPrice
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "item-price" },
+	              _react2.default.createElement("span", { className: "icon icon-rupee" }),
+	              item.price
+	            )
+	          );
+	        });
+	        var priceUI = _react2.default.createElement(
+	          "div",
+	          { className: "price-row col2-row" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "price-tot-label" },
+	            "Total Price"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "text-right" },
+	            _react2.default.createElement("span", { className: "icon icon-rupee" }),
+	            this.state.testsList.totalPrice
+	          )
+	        );
+	        var discountUI = _react2.default.createElement(
+	          "div",
+	          { className: "disc-row col2-row" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "discount-label" },
+	            "You Saved"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "text-right" },
+	            _react2.default.createElement("span", { className: "icon icon-rupee" }),
+	            this.state.testsList.totalListPrice - this.state.testsList.totalPrice
+	          )
+	        );
+	
+	        listUI = _react2.default.createElement(
+	          "div",
+	          { className: "list-content" },
+	          head,
+	          list,
+	          priceUI,
+	          discountUI
+	        );
+	      } else {
+	        listUI = _react2.default.createElement(
+	          "div",
+	          { className: "msg-block" },
+	          "No test added!!"
+	        );
+	      }
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "clearfix" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "modal-body " },
+	          listUI
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "modal-footer clearfix" },
+	          _react2.default.createElement(
+	            "label",
+	            { className: "footer-label fl" },
+	            this.state.testsList.labname
+	          ),
+	          _react2.default.createElement(
+	            "button",
+	            { type: "submit", "data-dismiss": "modal", className: "btn fr btn-success curved" },
+	            "checkout"
+	          ),
+	          _react2.default.createElement(
+	            "button",
+	            { type: "submit", "data-dismiss": "modal", className: "btn fr  curved" },
+	            "Add Tests"
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return OpenCartModalContent;
+	}(_react2.default.Component);
+	
+	exports.default = OpenCartModalContent;
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(console) {"use strict";
+	
+	var Fleb = Fleb || {};
+	
+	window.Fleb = Fleb;
+	Fleb.OpenModal = function (e) {
+	    var trigger = e.target.getAttribute("data-target");
+	    //trigger.classList.remove("fade-out");
+	    //trigger.classList.add("fade-in");
+	    var event = new Event('modalOpen');
+	    event.data = {
+	        "id": trigger
+	    };
+	    console.log("here");
+	    document.body.dispatchEvent(event);
+	};
+	var callBtn = document.getElementById("callUs");
+	callBtn.addEventListener("click", Fleb.OpenModal);
+	
+	var openCartBtn = document.getElementById("openCart");
+	openCartBtn.addEventListener("click", Fleb.OpenModal);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }
 /******/ ]);

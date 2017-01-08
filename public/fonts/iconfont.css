@@ -1,7 +1,7 @@
 @font-face {
 	font-family: "iconfont";
-	src: url("/public/fonts/iconfont.eot?61ead26304003547041346077663ec99?#iefix") format("embedded-opentype"),
-url("/public/fonts/iconfont.woff?61ead26304003547041346077663ec99") format("woff");
+	src: url("/public/fonts/iconfont.eot?c3d5205bc02f9339768181203d47297f?#iefix") format("embedded-opentype"),
+url("/public/fonts/iconfont.woff?c3d5205bc02f9339768181203d47297f") format("woff");
 }
 
 .icon {
@@ -15,24 +15,51 @@ url("/public/fonts/iconfont.woff?61ead26304003547041346077663ec99") format("woff
 	vertical-align: top;
 }
 
-.icon-add-circular-outlined-button:before {
+.icon-appointment:before {
 	content: "\f101";
 }
-.icon-appointment:before {
+.icon-bin:before {
 	content: "\f102";
 }
-.icon-delete-button:before {
+.icon-checked:before {
 	content: "\f103";
 }
-.icon-home-delivery:before {
+.icon-clock:before {
 	content: "\f104";
 }
-.icon-phone:before {
+.icon-delete:before {
 	content: "\f105";
 }
-.icon-round-delete-button:before {
+.icon-doctor:before {
 	content: "\f106";
 }
-.icon-shopping-cart:before {
+.icon-homedelivery:before {
 	content: "\f107";
+}
+.icon-info:before {
+	content: "\f108";
+}
+.icon-location:before {
+	content: "\f109";
+}
+.icon-minus:before {
+	content: "\f10a";
+}
+.icon-parking:before {
+	content: "\f10b";
+}
+.icon-phone:before {
+	content: "\f10c";
+}
+.icon-plus:before {
+	content: "\f10d";
+}
+.icon-rupee:before {
+	content: "\f10e";
+}
+.icon-shopping-cart:before {
+	content: "\f10f";
+}
+.icon-waiting:before {
+	content: "\f110";
 }

@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(186);
+	module.exports = __webpack_require__(188);
 
 
 /***/ },
@@ -52,7 +52,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -85,22 +85,45 @@
 	    }
 	
 	    _createClass(Modal, [{
-	        key: "componenDidMount",
-	        value: function componenDidMount() {}
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            document.body.addEventListener('modalClose', this.closeThis.bind(this));
+	            document.body.addEventListener('modalOpen', this.openModal.bind(this));
+	        }
 	    }, {
-	        key: "render",
+	        key: 'openModal',
+	        value: function openModal(e) {
+	            var elem = e.data.id;
+	            if (this.refs[elem]) {
+	                this.refs[elem].className = "modal-overlay fade-in";
+	            }
+	        }
+	    }, {
+	        key: 'closeThis',
+	        value: function closeThis(e) {
+	            if (e.target.id == this.props.id) {
+	                this.refs[this.props.id].className = "modal-overlay fade-out";
+	            }
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: this.props.open ? "modal-overlay fade-in" : "modal-overlay fade-out" },
+	                'div',
+	                { ref: this.props.id, id: this.props.id, onClick: this.closeThis.bind(this), className: this.props.open ? "modal-overlay fade-in" : "modal-overlay fade-out" },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "modal-content" },
+	                    'div',
+	                    { className: "modal-content  " + this.props.css },
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "modal-wrap" },
-	                        this.props.content
-	                    )
+	                        'div',
+	                        { className: 'modal-header' },
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            this.props.headText
+	                        )
+	                    ),
+	                    this.props.content
 	                )
 	            );
 	        }
@@ -22774,20 +22797,22 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 186 */
+/* 186 */,
+/* 187 */,
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _index = __webpack_require__(187);
+	var _index = __webpack_require__(189);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _popularTests = __webpack_require__(190);
+	var _popularTests = __webpack_require__(192);
 	
 	var _popularTests2 = _interopRequireDefault(_popularTests);
 	
-	var _PopularLabs = __webpack_require__(191);
+	var _PopularLabs = __webpack_require__(193);
 	
 	var _PopularLabs2 = _interopRequireDefault(_PopularLabs);
 	
@@ -22799,7 +22824,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _index3 = __webpack_require__(192);
+	var _index3 = __webpack_require__(194);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
@@ -22826,7 +22851,7 @@
 	//import ReactRouter from 'react-router';
 
 /***/ },
-/* 187 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {'use strict';
@@ -22841,7 +22866,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reqwest = __webpack_require__(188);
+	var _reqwest = __webpack_require__(190);
 	
 	var _reqwest2 = _interopRequireDefault(_reqwest);
 	
@@ -23177,7 +23202,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ },
-/* 188 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -23201,7 +23226,7 @@
 	  } else {
 	    var XHR2
 	    try {
-	      XHR2 = __webpack_require__(189)
+	      XHR2 = __webpack_require__(191)
 	    } catch (ex) {
 	      throw new Error('Peer dependency `xhr2` required! Please npm install xhr2')
 	    }
@@ -23813,13 +23838,13 @@
 
 
 /***/ },
-/* 189 */
+/* 191 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 190 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {'use strict';
@@ -23834,7 +23859,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reqwest = __webpack_require__(188);
+	var _reqwest = __webpack_require__(190);
 	
 	var _reqwest2 = _interopRequireDefault(_reqwest);
 	
@@ -23882,7 +23907,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ },
-/* 191 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {'use strict';
@@ -23897,7 +23922,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reqwest = __webpack_require__(188);
+	var _reqwest = __webpack_require__(190);
 	
 	var _reqwest2 = _interopRequireDefault(_reqwest);
 	
@@ -23919,8 +23944,8 @@
 	    }
 	
 	    _createClass(PopularLabs, [{
-	        key: 'componenDidMount',
-	        value: function componenDidMount() {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
 	            console.log("popular");
 	        }
 	    }, {
@@ -23945,7 +23970,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ },
-/* 192 */
+/* 194 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(197);
+	module.exports = __webpack_require__(199);
 
 
 /***/ },
@@ -22713,7 +22713,9 @@
 /***/ },
 /* 186 */,
 /* 187 */,
-/* 188 */
+/* 188 */,
+/* 189 */,
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -22737,7 +22739,7 @@
 	  } else {
 	    var XHR2
 	    try {
-	      XHR2 = __webpack_require__(189)
+	      XHR2 = __webpack_require__(191)
 	    } catch (ex) {
 	      throw new Error('Peer dependency `xhr2` required! Please npm install xhr2')
 	    }
@@ -23349,29 +23351,29 @@
 
 
 /***/ },
-/* 189 */
+/* 191 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 190 */,
-/* 191 */,
 /* 192 */,
 /* 193 */,
 /* 194 */,
 /* 195 */,
 /* 196 */,
-/* 197 */
+/* 197 */,
+/* 198 */,
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _search = __webpack_require__(198);
+	var _search = __webpack_require__(200);
 	
 	var _search2 = _interopRequireDefault(_search);
 	
-	var _search3 = __webpack_require__(199);
+	var _search3 = __webpack_require__(201);
 	
 	var _search4 = _interopRequireDefault(_search3);
 	
@@ -23390,7 +23392,7 @@
 	_reactDom2.default.render(_react2.default.createElement(_search2.default, { data: { hello: "world" } }), document.getElementById('root'));
 
 /***/ },
-/* 198 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {'use strict';
@@ -23405,11 +23407,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reqwest = __webpack_require__(188);
+	var _reqwest = __webpack_require__(190);
 	
 	var _reqwest2 = _interopRequireDefault(_reqwest);
 	
-	var _search = __webpack_require__(197);
+	var _search = __webpack_require__(199);
 	
 	var _search2 = _interopRequireDefault(_search);
 	
@@ -23445,7 +23447,7 @@
 					//url:"http://lowcost-env.hppsvuceth.ap-south-1.elasticbeanstalk.com/api/v0.1/labTest/getLabTestsFromTestNames?tests=Vitamin B6 (Pyridoxin), Serum;"
 					//url:"http://lowcost-env.hppsvuceth.ap-south-1.elasticbeanstalk.com/api/v0.1/test/getAllTests"
 					//url:"/getMultiLabs"
-					url: " http://lowcost-env.hppsvuceth.ap-south-1.elasticbeanstalk.com/api/v0.1/labTest/getLabTestsFromTestNames?tests=Vitamin B6 (Pyridoxin), Serum;Vitamin E (Tocopherol), Serum",
+					url: " http://lowcost-env.qxsdp2qnuv.ap-south-1.elasticbeanstalk.com/api/v0.1/labTest/getLabTestsFromTestNames?tests=Vitamin B6 (Pyridoxin), Serum;Vitamin E (Tocopherol), Serum",
 					type: 'json',
 					headers: {
 						"Access-Control-Allow-Origin": "*"
@@ -23476,8 +23478,21 @@
 				this.loadLabs.bind(this)();
 			}
 		}, {
+			key: 'showMoreDetails',
+			value: function showMoreDetails(e) {
+				var elem = e.target.getAttribute("data-target");
+				this.refs[elem].className = "lab-details fade-in";
+			}
+		}, {
+			key: 'hideMoreDetails',
+			value: function hideMoreDetails(e) {
+				var elem = e.target.getAttribute("data-target");
+				this.refs[elem].className = "lab-details fade-out";
+			}
+		}, {
 			key: 'render',
 			value: function render() {
+				var _this = this;
 				var loader = _react2.default.createElement(
 					'div',
 					{ className: !this.state.loading ? "hide" : "loader-wrap" },
@@ -23500,6 +23515,8 @@
 				);
 				var labListUI = [];
 				labListUI = this.state.labList.map(function (item, index) {
+					var lab = item.lab;
+					var labTest = item.labTest;
 					return _react2.default.createElement(
 						'div',
 						{ className: 'list-item' },
@@ -23509,34 +23526,90 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'item-head' },
-								_react2.default.createElement(
-									'button',
-									{ className: 'btn btn-link' },
-									'?'
-								),
+								_react2.default.createElement('button', { 'data-target': "labDetails" + index, onClick: _this.showMoreDetails.bind(_this), className: 'btn btn-link icon icon-info' }),
 								_react2.default.createElement(
 									'div',
-									{ className: 'pull-right price-block' },
+									{ className: 'fr price-block' },
 									_react2.default.createElement(
-										'span',
-										{ className: 'strike-price' },
-										item.MRP
+										'div',
+										{ className: 'striked-price' },
+										_react2.default.createElement('span', { className: 'icon icon-rupee' }),
+										labTest.MRP
 									),
 									_react2.default.createElement(
-										'span',
+										'div',
 										{ className: 'actual-price' },
-										item.offerPrice
+										_react2.default.createElement('span', { className: 'icon icon-rupee' }),
+										labTest.offerPrice
 									)
 								)
 							),
-							_react2.default.createElement('div', { className: 'lab-img' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'lab-img img-block' },
+								_react2.default.createElement('img', { src: "https://www.flebie.com/img/" + lab.labName + "_multi.jpg" })
+							),
 							_react2.default.createElement(
 								'div',
 								{ className: 'lab-footer' },
 								_react2.default.createElement(
 									'h3',
 									null,
-									item.name
+									lab.labName
+								),
+								_react2.default.createElement(
+									'h6',
+									null,
+									lab.location
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'clearfix' },
+									_react2.default.createElement('span', { className: lab.isNABLAccredited ? "fl icon icon-checked" : "hide" }),
+									_react2.default.createElement('span', { className: lab.isAvailableForHC ? "fl icon icon-homedelivery" : "hide" }),
+									_react2.default.createElement('span', { className: lab.isAvailableForOB ? "fl icon icon-appointment" : "hide" }),
+									_react2.default.createElement(
+										'button',
+										{ className: 'fr btn-btn-success bookme flebie-btn' },
+										'BOOK ME'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ ref: "labDetails" + index, className: 'lab-details fade-out' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'clearfix' },
+									_react2.default.createElement('button', { 'data-target': "labDetails" + index, onClick: _this.hideMoreDetails.bind(_this), className: 'fl btn btn-link icon icon-delete' })
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'clearfix details-block' },
+									_react2.default.createElement(
+										'div',
+										null,
+										_react2.default.createElement('span', { className: 'icon icon-clock' }),
+										lab.operatingHours
+									),
+									_react2.default.createElement(
+										'div',
+										null,
+										_react2.default.createElement('span', { className: 'icon icon-parking' }),
+										"Road side parking"
+									),
+									_react2.default.createElement(
+										'div',
+										null,
+										_react2.default.createElement('span', { className: 'icon icon-waiting' }),
+										lab.averageWaitingTime + " mins"
+									),
+									_react2.default.createElement(
+										'div',
+										null,
+										_react2.default.createElement('span', { className: 'icon icon-location' }),
+										lab.address
+									)
 								)
 							)
 						)
@@ -23563,7 +23636,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ },
-/* 199 */
+/* 201 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

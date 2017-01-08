@@ -17,7 +17,7 @@ class Search extends React.Component {
 				//url:"http://lowcost-env.hppsvuceth.ap-south-1.elasticbeanstalk.com/api/v0.1/labTest/getLabTestsFromTestNames?tests=Vitamin B6 (Pyridoxin), Serum;"
 				//url:"http://lowcost-env.hppsvuceth.ap-south-1.elasticbeanstalk.com/api/v0.1/test/getAllTests"
 				//url:"/getMultiLabs"
-				url:" http://lowcost-env.hppsvuceth.ap-south-1.elasticbeanstalk.com/api/v0.1/labTest/getLabTestsFromTestNames?tests=Vitamin B6 (Pyridoxin), Serum;Vitamin E (Tocopherol), Serum"
+				url:" http://lowcost-env.qxsdp2qnuv.ap-south-1.elasticbeanstalk.com/api/v0.1/labTest/getLabTestsFromTestNames?tests=Vitamin B6 (Pyridoxin), Serum;Vitamin E (Tocopherol), Serum"
 				, type: 'json'
 				,headers:{
 					"Access-Control-Allow-Origin":"*"
@@ -45,7 +45,16 @@ class Search extends React.Component {
         //getMultiLabs
         this.loadLabs.bind(this)();
 	}
+	showMoreDetails(e){
+		var elem = e.target.getAttribute("data-target");
+		this.refs[elem].className="lab-details fade-in";
+	}
+	hideMoreDetails(e){
+		var elem = e.target.getAttribute("data-target");
+		this.refs[elem].className="lab-details fade-out";
+	}
     render(){
+		var _this = this;
 		var loader= <div className={(!this.state.loading)?"hide":"loader-wrap"}>
 				<div className="sk-circle">
 					<div className="sk-circle1 sk-child"></div>
@@ -64,19 +73,48 @@ class Search extends React.Component {
 			</div>;
 		var labListUI=[];
 		labListUI= this.state.labList.map(function(item,index){
+			var lab = item.lab;
+			var labTest = item.labTest;
 			return <div className="list-item">
 					<div><div className="item-head">
-						<button className="btn btn-link">?</button>
-						<div className="pull-right price-block">
-							<span className="strike-price">{item.MRP}</span>
-							<span className="actual-price">{item.offerPrice}</span>
+						<button data-target={"labDetails"+index} onClick={_this.showMoreDetails.bind(_this)} className="btn btn-link icon icon-info"></button>
+						<div className="fr price-block">
+							<div className="striked-price"><span className="icon icon-rupee"/>{labTest.MRP}</div>
+							<div className="actual-price"><span className="icon icon-rupee"/>{labTest.offerPrice}</div>
 						</div>
 					</div>
-					<div className="lab-img">
+					<div className="lab-img img-block">
+						<img src={"https://www.flebie.com/img/"+lab.labName+"_multi.jpg"}/>
 					</div>
 					<div className="lab-footer">
-						<h3>{item.name}</h3>
+						<h3>{lab.labName}</h3>
+						<h6>{lab.location}</h6>
+						<div className="clearfix">
+							<span className={(lab.isNABLAccredited)?"fl icon icon-checked":"hide"}/>
+							<span className={(lab.isAvailableForHC)?"fl icon icon-homedelivery":"hide"}/>
+							<span className={(lab.isAvailableForOB)?"fl icon icon-appointment":"hide"}/>
+							<button className="fr btn-btn-success bookme flebie-btn">BOOK ME</button>
+						</div>
 					</div>
+					<div ref={"labDetails"+index} className="lab-details fade-out">
+					<div className="clearfix">
+						<button data-target={"labDetails"+index} onClick={_this.hideMoreDetails.bind(_this)} className="fl btn btn-link icon icon-delete"/>
+					</div>
+					<div className="clearfix details-block">
+						<div>
+							<span className="icon icon-clock"/>{lab.operatingHours}
+						</div>
+						<div>
+							<span className="icon icon-parking"/>{"Road side parking"}
+						</div>
+						<div>
+							<span className="icon icon-waiting"/>{lab.averageWaitingTime+" mins"}
+						</div>
+						<div>
+							<span className="icon icon-location"/>{lab.address}
+						</div>
+					</div>
+				</div>
 				</div>
 			</div>
 		})
